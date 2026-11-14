@@ -20,6 +20,8 @@ The skill instructions and course examples are currently written in Russian.
 
 ## Installation
 
+New to Node.js or missing `npx`? Follow the [macOS, Windows, and Linux setup guide](docs/install-node.md) first.
+
 Use [Skills CLI](https://github.com/vercel-labs/skills) with a supported Node.js
 version. The following commands install one skill globally for Codex:
 
