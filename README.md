@@ -1,93 +1,109 @@
-# AI Skills
+# AI Learning
 
-Авторские скиллы Сергея Кикевича для ИИ-агентов. Набор предназначен для слушателей
-курса по мультиагентной разработке и использования в собственных проектах.
+Portable skills by Sergey Kikevich for AI coding agents, agent-assisted development
+courses, and personal projects.
 
-Скилл — инструкция для повторяемой работы агента. Он не устанавливает Git,
-оркестратор, MCP или учётные записи и не выдаёт дополнительных разрешений.
+A skill is a reusable workflow instruction. It does not install Git, an
+orchestrator, MCP servers, or accounts, and it does not grant additional authority.
 
-## Скиллы
+## Available skills
 
-| Скилл | Назначение |
+| Skill | Purpose |
 | --- | --- |
-| [commit](skills/commit/SKILL.md) | Проверка изменений, логические коммиты, отдельные разрешения на push и PR, сохранение чужих правок |
-| [tracker-task-hygiene](skills/tracker-task-hygiene/SKILL.md) | Постановка задач, DoD, актуальные статусы, поручения агентам и подтверждённое завершение |
+| [commit](skills/commit/SKILL.md) | Review changes, create coherent commits, preserve unrelated work, and handle push/PR permissions |
+| [tracker-task-hygiene](skills/tracker-task-hygiene/SKILL.md) | Write clear tasks and acceptance criteria, maintain accurate status, and report verified completion |
+| [agent-behavior-graph](skills/agent-behavior-graph/SKILL.md) | Design and review agent workflows with branches, bounded retries, waits, handoffs, and escalation |
 
-`commit` — компактная учебная редакция авторского рабочего скилла. Она
-самостоятельна: личные серверы, пути, память и скрипты автора не требуются.
-Это не скилл OpenAI `yeet` и не одноимённая процедура Sentry.
+These are self-contained educational adaptations of the author's working skills.
+They do not depend on the author's private servers, memory, paths, or scripts.
+The skill instructions and course examples are currently written in Russian.
 
-`tracker-task-hygiene` — самостоятельная учебная процедура для GitHub Issues,
-YouTrack, Linear и других трекеров. Следует правилам выбранного проекта,
-не требует личного окружения автора и не заменяет подключение к трекеру.
+## Installation
 
-## Установка
-
-Выберите используемый харнес. Следующие команды устанавливают только
-`commit` в пользовательскую область, чтобы он был доступен между проектами:
+Use [Skills CLI](https://github.com/vercel-labs/skills) with a supported Node.js
+version. The following commands install one skill globally for Codex:
 
 ```bash
-# Codex
-npx skills add mbk-dev/ai-skills --skill commit -g -a codex
-
-# Claude Code
-npx skills add mbk-dev/ai-skills --skill commit -g -a claude-code
-
-# OpenCode
-npx skills add mbk-dev/ai-skills --skill commit -g -a opencode
+npx skills add mbk-dev/ai-learning --skill commit -g -a codex
+npx skills add mbk-dev/ai-learning --skill tracker-task-hygiene -g -a codex
+npx skills add mbk-dev/ai-learning --skill agent-behavior-graph -g -a codex
 ```
 
-Для установки `tracker-task-hygiene` выберите свою команду:
+For Claude Code, replace `-a codex` with `-a claude-code`. For OpenCode, use
+`-a opencode`. To install only in a project, run the command from that project
+and omit `-g`.
+
+Check for an existing skill with the same name before installing. Do not overwrite
+a different implementation without reviewing it. Use a separate training profile
+or a supported rename when both versions are needed. Start a fresh agent session
+and verify that the intended skill is available.
+
+Codex users can also ask the built-in `skill-installer` to install a selected
+folder, such as `skills/agent-behavior-graph`, from `mbk-dev/ai-learning`.
+
+List available skills without installing them:
 
 ```bash
-npx skills add mbk-dev/ai-skills --skill tracker-task-hygiene -g -a codex
-npx skills add mbk-dev/ai-skills --skill tracker-task-hygiene -g -a claude-code
-npx skills add mbk-dev/ai-skills --skill tracker-task-hygiene -g -a opencode
+npx skills add mbk-dev/ai-learning --list
 ```
 
-Для проектной установки выполните нужную команду из учебного репозитория без
-`-g`. Перед установкой проверьте, нет ли уже скилла с выбранным именем;
-не перезаписывайте его без проверки. Для параллельного использования выбирайте
-отдельный учебный профиль или поддерживаемое установщиком переименование.
+## Usage and exercises
 
-Команды используют [Skills CLI](https://github.com/vercel-labs/skills);
-установите поддерживаемую им версию Node.js. Начните новую сессию агента после
-установки и проверьте, что он видит нужный скилл.
+**Commit**
 
-В Codex можно также попросить встроенный `skill-installer` установить
-`skills/commit` или `skills/tracker-task-hygiene` из репозитория `mbk-dev/ai-skills`.
+> Use the commit skill. Inspect the changes and create only a local commit for
+> the fix. Do not push.
 
-Для просмотра доступного состава без установки:
+[Commit exercise](docs/commit-exercise.md).
+
+**Tracker task hygiene**
+
+> Use tracker-task-hygiene to draft a task for this problem: intended outcome,
+> scope, and verifiable acceptance criteria. Do not publish it yet.
+
+[Task examples and exercise](skills/tracker-task-hygiene/references/examples.md).
+
+**Agent behavior graph**
+
+> Use agent-behavior-graph to describe this process, including failure branches,
+> bounded retries, and escalation. Separate confirmed requirements from unknowns.
+
+[Workflow example and exercise](skills/agent-behavior-graph/references/example.md).
+
+Project instructions and existing permissions continue to apply. A diagram is a
+workflow contract, not an execution engine.
+
+## Graph checker
+
+The graph skill includes a Python 3.10+ checker using only the standard library.
+From a checkout of this repository:
 
 ```bash
-npx skills add mbk-dev/ai-skills --list
+python3 skills/agent-behavior-graph/scripts/graph_check.py skills/agent-behavior-graph/references/example.md
+python3 -m unittest discover -s skills/agent-behavior-graph/tests -v
 ```
 
-## Как пользоваться
+It checks flat Mermaid state diagrams for structural problems, including missing
+entry/exit paths, unreachable states, incomplete fallbacks, and apparently
+unbounded cycles. Nested/concurrent state diagrams are outside its supported
+subset. It is a heuristic: it cannot prove that a counter changes, that guards
+are correct, or that an agent will follow the process. Render diagrams separately
+and inspect them visually.
 
-Например:
+For Python lint and formatting checks:
 
-> Примени скилл commit. Проверь изменения и создай только локальный коммит
-> исправления. Не отправляй изменения в remote.
+```bash
+uvx ruff check skills/agent-behavior-graph
+uvx ruff format --check skills/agent-behavior-graph
+```
 
-При необходимости отдельно поручите push или подготовку PR. Правила проекта,
-его проверки и ранее выданные разрешения продолжают действовать.
+## Validation status
 
-[Упражнение для commit](docs/commit-exercise.md).
+The skill instructions passed compatibility checks in the author's environment.
+The graph checker passed 15 CLI regression tests, and the included example passed
+structural checks and rendering with Mermaid CLI 11.17.0. These checks do not
+constitute a behavioral evaluation of an autonomous agent or a clean classroom VM.
 
-Для работы с задачами:
-
-> Примени tracker-task-hygiene. Подготовь черновик задачи по описанной проблеме:
-> результат, границы и проверяемые критерии готовности. Пока не публикуй.
-
-[Примеры и упражнение для tracker-task-hygiene](skills/tracker-task-hygiene/references/examples.md).
-
-## Статус
-
-Содержимое скиллов проверено на совместимость с инструкциями среды автора.
-Наличие инструкции не гарантирует её соблюдения моделью. Поведенческий прогон
-на чистой учебной VM пока не выполнен; он не заявляется как пройденный.
-
-## Лицензия
+## License
 
 [MIT](LICENSE). Copyright © 2026 Sergey Kikevich.
