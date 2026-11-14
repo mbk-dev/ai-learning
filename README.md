@@ -1,7 +1,7 @@
 # AI Learning
 
-Portable skills by Sergey Kikevich for AI coding agents, agent-assisted development
-courses, and personal projects.
+Portable skills for AI coding agents, agent-assisted development courses,
+and personal projects.
 
 A skill is a reusable workflow instruction. It does not install Git, an
 orchestrator, MCP servers, or accounts, and it does not grant additional authority.
@@ -106,4 +106,4 @@ constitute a behavioral evaluation of an autonomous agent or a clean classroom V
 
 ## License
 
-[MIT](LICENSE). Copyright © 2026 Sergey Kikevich.
+[MIT](LICENSE).
