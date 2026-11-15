@@ -6,6 +6,15 @@ and personal projects.
 A skill is a reusable workflow instruction. It does not install Git, an
 orchestrator, MCP servers, or accounts, and it does not grant additional authority.
 
+## Native Codex subagents — milestone 1
+
+Use the [student setup prompt](docs/codex-native-subagents-setup-prompt.md)
+to install the course's native Codex roles globally with your ChatGPT sign-in.
+The prompt preserves existing settings and asks before resolving conflicts.
+See the [setup guide](docs/codex-native-subagents.md) and
+[ready-to-copy TOML files](codex/native-subagents/agents/).
+No API keys or third-party model providers are required.
+
 ## Available skills
 
 | Skill | Purpose |
