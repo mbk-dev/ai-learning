@@ -22,6 +22,7 @@ No API keys or third-party model providers are required.
 | [commit](skills/commit/SKILL.md) | Review changes, create coherent commits, preserve unrelated work, and handle push/PR permissions |
 | [tracker-task-hygiene](skills/tracker-task-hygiene/SKILL.md) | Write clear tasks and acceptance criteria, maintain accurate status, and report verified completion |
 | [agent-behavior-graph](skills/agent-behavior-graph/SKILL.md) | Design and review agent workflows with branches, bounded retries, waits, handoffs, and escalation |
+| [course-run-epic-waves](skills/course-run-epic-waves/SKILL.md) | Coordinate course tasks through dependency graphs, independent agent waves, acceptance, integration, and recovery |
 
 These are self-contained educational adaptations of the author's working skills.
 They do not depend on the author's private servers, memory, paths, or scripts.
@@ -38,6 +39,7 @@ version. The following commands install one skill globally for Codex:
 npx skills add mbk-dev/ai-learning --skill commit -g -a codex
 npx skills add mbk-dev/ai-learning --skill tracker-task-hygiene -g -a codex
 npx skills add mbk-dev/ai-learning --skill agent-behavior-graph -g -a codex
+npx skills add mbk-dev/ai-learning --skill course-run-epic-waves -g -a codex
 ```
 
 For Claude Code, replace `-a codex` with `-a claude-code`. For OpenCode, use
@@ -81,6 +83,16 @@ npx skills add mbk-dev/ai-learning --list
 
 [Workflow example and exercise](skills/agent-behavior-graph/references/example.md).
 
+**Task waves — milestone 1**
+
+> Use course-run-epic-waves to execute this training task through a dependency
+> graph and independent agent waves. Verify each result and deliver each wave
+> before starting the next. Preserve permissions and pending operations on resume.
+
+[Exercise, expected artifacts, and failure scenarios](docs/run-epic-waves-exercise.md).
+The course uses native Codex roles through ChatGPT sign-in; the skill does not
+require external CLI workers or paid API keys.
+
 Project instructions and existing permissions continue to apply. A diagram is a
 workflow contract, not an execution engine.
 
@@ -114,6 +126,12 @@ The skill instructions passed compatibility checks in the author's environment.
 The graph checker passed 15 CLI regression tests, and the included example passed
 structural checks and rendering with Mermaid CLI 11.17.0. These checks do not
 constitute a behavioral evaluation of an autonomous agent or a clean classroom VM.
+
+The task-wave skill passed format and instruction-compatibility checks; both
+example graphs were rendered and visually inspected with Mermaid CLI 11.17.1,
+and its state diagram passed the included graph checker. Skills CLI discovers
+all four skills. Agent execution and clean-VM validation remain unperformed; see
+the [exercise validation notes](docs/run-epic-waves-exercise.md#статус-проверки-материала).
 
 ## License
 
