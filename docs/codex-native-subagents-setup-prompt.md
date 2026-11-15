@@ -1,20 +1,33 @@
 # Промпт для ученика
 
-Открой корень локального checkout `mbk-dev/ai-learning` в Codex.
-Войди через свой аккаунт ChatGPT. Скопируй весь блок:
+Открой Codex и войди через свой аккаунт ChatGPT. Скопируй весь блок:
+исходные материалы доступны на GitHub по полным URL, клонировать репозиторий
+заранее не требуется.
 
 ---
 
 Настрой мне глобально нативные субагенты Codex для вехи 1 курса по
-мультиагентной разработке из этого локального репозитория.
+мультиагентной разработке из опубликованного репозитория:
+https://github.com/mbk-dev/ai-learning
+
+Ссылки ниже ведут на исходные материалы в GitHub. Локальные пути в остальных
+пунктах обозначают существующие настройки на моём компьютере.
 
 Используй только Codex с моим текущим входом ChatGPT. Не подключай API,
 OpenCode, OpenRouter или других провайдеров. Не запрашивай и не читай
 auth.json, API-ключи и другие секреты.
 
-1. Прочитай docs/codex-native-subagents.md и относящиеся к этой установке
-   файлы codex/native-subagents/. Прочитай учебный AGENTS.md в корне.
-   Если файлов нет, сообщи конкретную проблему; не придумывай их содержимое.
+1. Прочитай исходные материалы по полным URL:
+   - Инструкция: https://github.com/mbk-dev/ai-learning/blob/main/docs/codex-native-subagents.md
+   - Учебный AGENTS.md: https://github.com/mbk-dev/ai-learning/blob/main/AGENTS.md
+   - Фрагмент конфигурации: https://github.com/mbk-dev/ai-learning/blob/main/codex/native-subagents/config.fragment.toml
+   - Роль explorer: https://github.com/mbk-dev/ai-learning/blob/main/codex/native-subagents/agents/explorer.toml
+   - Роль worker: https://github.com/mbk-dev/ai-learning/blob/main/codex/native-subagents/agents/worker.toml
+   - Роль reviewer: https://github.com/mbk-dev/ai-learning/blob/main/codex/native-subagents/agents/reviewer.toml
+   - Роль docs_researcher: https://github.com/mbk-dev/ai-learning/blob/main/codex/native-subagents/agents/docs_researcher.toml
+   Если материал по URL недоступен, сообщи конкретную проблему;
+   не придумывай его содержимое. Если локальная копия репозитория уже есть,
+   сверь её с опубликованными материалами перед использованием.
 2. Определи ОС, активное окружение Codex, его версию и Codex home с учётом
    CODEX_HOME. Проверь существующие глобальные инструкции, включая
    AGENTS.override.md, конфигурацию и четыре одноимённые роли.
@@ -25,10 +38,12 @@ auth.json, API-ключи и другие секреты.
 4. Установи explorer, worker, reviewer и docs_researcher в глобальный agents/.
    Идентичные файлы оставь без изменений. Отличающиеся существующие роли
    покажи кратким diff и спроси, заменять ли их. Сохрани остальные роли.
-5. Объедини config.fragment.toml с глобальным config.toml, сохраняя прочие
+5. Объедини фрагмент конфигурации по URL из пункта 1 с моим локальным
+   глобальным config.toml, сохраняя прочие
    параметры. Не дублируй [agents] и не оставляй конфликт с max_threads.
    Конфликтующие пользовательские значения покажи перед заменой.
-6. Адаптируй и объедини учебный AGENTS.md с глобальными инструкциями.
+6. Адаптируй учебный AGENTS.md по URL из пункта 1 и объедини его с моими
+   локальными глобальными инструкциями.
    Не перезаписывай их целиком, не дублируй правила, сохраняй более строгие
    ограничения. При содержательном конфликте или активном override сначала
    объясни варианты и спроси, какой выбрать. Не меняй инструкции проектов.
