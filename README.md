@@ -15,6 +15,19 @@ See the [setup guide](docs/codex-native-subagents.md) and
 [ready-to-copy TOML files](codex/native-subagents/agents/).
 No API keys or third-party model providers are required.
 
+## Keep instructions and task knowledge up to date
+
+Use the [update-instructions setup prompt](docs/update-instructions-setup-prompt.md)
+to create a portable personal workflow in Codex or Claude Code. It includes the
+skill content, so a local checkout is not required. The prompt preserves existing
+settings and provides backup, rollback, and fresh-session verification steps.
+
+Invoke `$update-instructions` in Codex or `/update_instructions` in Claude Code.
+Use `--no-delivery` to update verified knowledge without publishing, or
+`--checkpoint` to save task state for continuation. Full delivery follows the
+project's permissions and review process; automatic knowledge updates do not
+grant permission to publish.
+
 ## Available skills
 
 | Skill | Purpose |
